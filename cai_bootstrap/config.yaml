@@ -40,4 +40,4 @@ schema:
   serial: "str?"
   bootstrap_token: "str?"
   fallback_api_key: "password?"
-image: "ghcr.io/cai-technology/cai-bootstrap-{arch}"
+image: "registry.smart-iot.caitech.ro/cai-bootstrap-{arch}"
