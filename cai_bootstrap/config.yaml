@@ -1,5 +1,5 @@
 name: "CAI Bootstrap"
-version: "0.1.4"
+version: "0.1.5"
 slug: "cai_bootstrap"
 description: "CAI Technology device onboarding agent. Connects your device to your CAI account."
 url: "https://www.caitech.ro"
@@ -10,7 +10,6 @@ arch:
 startup: services
 boot: auto
 init: false
-host_network: true
 host_dbus: true
 full_access: true
 homeassistant_api: true
