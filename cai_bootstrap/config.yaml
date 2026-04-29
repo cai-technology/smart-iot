@@ -1,5 +1,5 @@
 name: "CAI Bootstrap"
-version: "0.1.5"
+version: "0.1.6"
 slug: "cai_bootstrap"
 description: "CAI Technology device onboarding agent. Connects your device to your CAI account."
 url: "https://www.caitech.ro"
