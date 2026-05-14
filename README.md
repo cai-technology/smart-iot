@@ -1,43 +1,46 @@
-# CAI Technology — Smart-IoT Home Assistant Add-ons
+# CAI Bootstrap
 
-Official Home Assistant add-on repository for CAI Technology's
-**Smart-IoT** product line.
+Adaugă acest Raspberry Pi în contul tău **Smart-IoT** și îl conectează la
+cluster-ul CAI Technology. După instalare nu mai trebuie să rulezi nimic
+manual — addon-ul se ocupă singur de înregistrare, sincronizare oră și
+heartbeat.
 
-## Add this repository to your Home Assistant
+## După instalare — 3 pași
 
-1. Open **Settings → Add-ons → Add-on Store**.
-2. Click the **⋮** menu (top right) → **Repositories**.
-3. Add the URL:
+1. **Click „Open Web UI"** (butonul din dreapta-jos pe pagina addon-ului).
+2. **Pasul 1 din 3** — introdu codul claim primit pe email de la instalator
+   (formatul `ABCD-EFGH-JKLM`, 12 caractere). Spațiile și liniuțele se
+   completează automat.
+3. **Pasul 2 + 3** — confirmă asocierea pe `auth.caitech.ro` (login cu
+   contul tău CAI) și gata.
 
-   ```
-   https://github.com/cai-technology/smart-iot
-   ```
+După acești 3 pași, device-ul tău apare în dashboard la
+[https://app.smart-iot.caitech.ro](https://app.smart-iot.caitech.ro)
+și trimite status periodic (default la fiecare 5 minute).
 
-4. Refresh the store. The add-ons listed below will appear under
-   **CAI Technology Smart-IoT Add-ons**.
+## Setări recomandate
 
-## Add-ons in this repository
+Versiunea 0.1.8+ aplică automat la prima pornire:
 
-### CAI Bootstrap
+- **Show in sidebar** = ON — addon-ul apare în sidebar ca „Pair Device"
+- **Auto update** = ON — primești update-uri ale addon-ului automat
+- **Watchdog** = ON — addon-ul repornește automat dacă se oprește
+- **Start on boot** = ON (default Home Assistant)
 
-Device onboarding agent for CAI-Hassio Smart-IoT systems.
+Le poți schimba oricând din UI; addon-ul nu suprascrie alegerea ta a doua
+oară.
 
-- Enrols the device with the CAI Fleet control plane at
-  `smart-iot.caitech.ro`.
-- Maintains a persistent WebSocket tunnel for operator commands.
-- Discovers IoT devices on the LAN (zeroconf, Solarman UDP) and
-  auto-generates Lovelace cards for matched inverters.
-- Exposes a sidebar panel **Pair Device** for the customer to link the
-  device to their CAI-Auth account via RFC 8628 OAuth Device Flow.
+## Update-uri Home Assistant OS
 
-See [`cai_bootstrap/`](cai_bootstrap/) for the manifest and source.
+Smart-IoT este testat pe HAOS-ul livrat în imaginea factory CAI. **Dacă
+schimbi update channel-ul HA (Settings → System → Updates) către `beta`
+sau `dev`, garanția și mentenanța se anulează** — vezi contract.
+Addon-ul raportează automat versiunea HAOS la cluster; modificarea
+canalului este vizibilă imediat instalatorului în dashboard.
 
-## Support
+## Suport
 
-Issues and feature requests: https://github.com/cai-technology/smart-iot/issues
-
-Commercial support: tehnic@caitech.ro
-
-## Licence
-
-Proprietary — © CAI Technology S.R.L. All rights reserved.
+- **Site oficial**: [https://www.caitech.ro](https://www.caitech.ro)
+- **Documentație produs**: [https://smart-iot.caitech.ro/manual](https://smart-iot.caitech.ro/manual)
+- **Probleme**: contactează instalatorul tău; el are dashboard cu
+  starea device-ului în timp real.

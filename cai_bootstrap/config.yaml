@@ -1,7 +1,9 @@
+# Home Assistant Add-on manifest.
+# Ref: https://developers.home-assistant.io/docs/add-ons/configuration/
 name: "CAI Bootstrap"
-version: "0.1.7"
+version: "0.1.8"
 slug: "cai_bootstrap"
-description: "CAI Technology device onboarding agent. Connects your device to your CAI account."
+description: "Conectează acest Raspberry Pi la contul tău Smart-IoT. La pornire se înregistrează singur la cluster, te conduce printr-un wizard de 3 pași (cod claim → confirmare contul tău → gata) și apoi rulează în fundal trimițând doar status checks. Click 'Open Web UI' după install ca să începi."
 url: "https://www.caitech.ro"
 arch:
   - aarch64
@@ -10,6 +12,11 @@ arch:
 startup: services
 boot: auto
 init: false
+# host_network DISABLED — conflicted with ingress on port 8099, causing
+# duplicate addon container processes (s6 + ingress proxy both binding).
+# Trade-off: zeroconf/mDNS scan in Phase 6 sees only the container netns;
+# Solarman UDP probe still works (broadcast). v1.0 accepts this tradeoff;
+# revisit if more discovery types need true LAN visibility.
 host_dbus: true
 full_access: true
 homeassistant_api: true
@@ -20,6 +27,9 @@ map:
   - "ssl:rw"
   - "addons"
   - "backup"
+# Phase 7-b: expose the pairing UI as an HA sidebar panel.
+# The addon serves an aiohttp app on `ingress_port`, HA proxies it under
+# /hassio/ingress/<addon_slug>/. Users see "Pair Device" in their sidebar.
 ingress: true
 ingress_port: 8099
 panel_icon: "mdi:account-key"
@@ -29,6 +39,8 @@ options:
   cluster_url: "https://smart-iot.caitech.ro"
   heartbeat_interval_sec: 300
   log_level: "info"
+  # Factory-provisioned items (populated by the build pipeline via config
+  # override or hassos.img injection; empty in the default distribution).
   serial: ""
   bootstrap_token: ""
   fallback_api_key: ""
